@@ -11,7 +11,7 @@ def client(db) -> Client:
 
 
 @pytest.fixture
-def test_address(db) :
+def test_address(db):
     return Address.objects.create(
         number=1,
         street="my street",
