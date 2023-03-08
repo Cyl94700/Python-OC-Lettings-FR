@@ -19,13 +19,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'oc_lettings_site.apps.OCLettingsSiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'oc_lettings_site.apps.OCLettingsSiteConfig',
+    'oc_lettings_site.lettings',
+    'oc_lettings_site.profiles',
+    'oc_lettings_site.home_site',
 ]
 
 MIDDLEWARE = [
@@ -43,7 +46,7 @@ ROOT_URLCONF = 'oc_lettings_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'oc_lettings_site/home_site/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
