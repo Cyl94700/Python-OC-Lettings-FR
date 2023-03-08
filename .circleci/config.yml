@@ -18,7 +18,7 @@
         - run:
             command: flake8
             name: run linting
-workflows:
-  master:
-    jobs:
-      - build-and-test
+  workflows:
+    master:
+      jobs:
+        - build-and-test
