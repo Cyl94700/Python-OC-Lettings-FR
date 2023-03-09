@@ -7,13 +7,13 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('oc_lettings_site', '0002_auto_20230227_1830'),
+        ('home_site', '0002_auto_20230227_1830'),
     ]
 
     operations = [
         migrations.RunSQL("""
-                DROP TABLE main.oc_lettings_site_address;
-                DROP TABLE main.oc_lettings_site_letting;
-                DROP TABLE main.oc_lettings_site_profile;
+                DROP TABLE oc_lettings_site_address;
+                DROP TABLE oc_lettings_site_letting;
+                DROP TABLE oc_lettings_site_profile;
             """)
     ]
