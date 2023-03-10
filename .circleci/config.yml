@@ -44,4 +44,4 @@
             filters:
               branches:
                 only:
-                  - pipeline_conteneurisation-suit
+                  - master
