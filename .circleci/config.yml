@@ -34,6 +34,20 @@
               docker tag $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1 $DOCKER_USERNAME/$DOCKER_REPO:latest
               docker push $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
               docker push $DOCKER_USERNAME/$DOCKER_REPO:latest
+
+    deploiement-heroku:
+      docker:
+        - image: cimg/python:3.10.5
+      steps:
+        - checkout
+        - setup_remote_docker
+        - run:
+            name: Start container and push to Heroku
+            command: |
+              heroku config:set DJANGO_ALLOWED_HOSTS=$HEROKU_APP_NAME.herokuapp.com --app $HEROKU_APP_NAME
+              HEROKU_API_KEY=$HEROKU_API_KEY heroku container:login
+              HEROKU_API_KEY=$HEROKU_API_KEY heroku container:push -a $HEROKU_APP_NAME web
+              HEROKU_API_KEY=$HEROKU_API_KEY heroku container:release -a $HEROKU_APP_NAME web
   workflows:
     master:
       jobs:
@@ -41,6 +55,13 @@
         - build_docker_push:
             requires:
               - build-and-test
+            filters:
+              branches:
+                only:
+                  - master
+        - deploiement-heroku:
+            requires:
+              - build_docker_push
             filters:
               branches:
                 only:
