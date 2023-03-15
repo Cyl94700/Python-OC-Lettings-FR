@@ -1,5 +1,7 @@
 import os
 from dotenv import load_dotenv
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -111,3 +113,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Sentry Django integration
+sentry_sdk.init(
+    dsn=os.getenv('SENTRY_DSN'),
+    integrations=[DjangoIntegration()],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=1.0,
+
+    # By default, the SDK will try to use the SENTRY_RELEASE
+    # environment variable, or infer a git commit
+    # SHA as release, however you may want to set
+    # something more human-readable.
+    # release="myapp@1.0.0",
+)
