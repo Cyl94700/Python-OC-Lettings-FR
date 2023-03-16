@@ -35,7 +35,7 @@
               docker push $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
               docker push $DOCKER_USERNAME/$DOCKER_REPO:latest
 
-    deploiement-heroku:
+    deployment-heroku:
       docker:
         - image: cimg/python:3.10.5
       steps:
@@ -46,6 +46,7 @@
             command: |
               curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
               heroku config:set DJANGO_ALLOWED_HOSTS=$HEROKU_APP_NAME.herokuapp.com --app $HEROKU_APP_NAME
+              HEROKU_API_KEY=$HEROKU_API_KEY heroku config:set SENTRY_DSN=$SENTRY_DSN -a $HEROKU_APP_NAME
               HEROKU_API_KEY=$HEROKU_API_KEY heroku container:login
               HEROKU_API_KEY=$HEROKU_API_KEY heroku container:push -a $HEROKU_APP_NAME web
               HEROKU_API_KEY=$HEROKU_API_KEY heroku container:release -a $HEROKU_APP_NAME web
@@ -60,7 +61,7 @@
               branches:
                 only:
                   - master
-        - deploiement-heroku:
+        - deployment-heroku:
             requires:
               - build_docker_push
             filters:
