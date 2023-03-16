@@ -35,7 +35,7 @@
               docker push $DOCKER_USERNAME/$DOCKER_REPO:$CIRCLE_SHA1
               docker push $DOCKER_USERNAME/$DOCKER_REPO:latest
 
-    deploiement-heroku:
+    deployment-heroku:
       docker:
         - image: cimg/python:3.10.5
       steps:
@@ -57,14 +57,14 @@
         - build_docker_push:
             requires:
               - build-and-test
-            #filters:
-              #branches:
-                #only:
-                  #- master
-        - deploiement-heroku:
+            filters:
+              branches:
+                only:
+                  - master
+        - deployment-heroku:
             requires:
               - build_docker_push
-            #filters:
-              #branches:
-                #only:
-                  #- master
+            filters:
+              branches:
+                only:
+                  - master
