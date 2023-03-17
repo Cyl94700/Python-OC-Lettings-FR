@@ -13,7 +13,7 @@ RUN apk add --no-cache expat-dev && \
 RUN apk add --no-cache openssl-dev && \
     apk add --no-cache --virtual .build-deps build-base libffi-dev && \
     pip install cryptography==3.4.7 && \
-    apk del .build-deps \
+    apk del .build-deps
 
 WORKDIR /code
 
