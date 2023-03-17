@@ -5,6 +5,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Fix for libexpat vulnerability
 RUN apk add --no-cache expat-dev && \
+    apk add --no-cache expat-dev libxml2-dev libxslt-dev && \
     apk add --no-cache --virtual .build-deps gcc musl-dev && \
     pip install --upgrade lxml==4.6.3 && \
     apk del .build-deps
