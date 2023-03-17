@@ -2,6 +2,7 @@ FROM python:3.10.5-alpine
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV RUSTFLAGS="-C target-feature=-crt-static"
 
 # Fix for libexpat vulnerability
 RUN apk add --no-cache expat-dev && \
@@ -11,12 +12,11 @@ RUN apk add --no-cache expat-dev && \
     apk del .build-deps
 
 # Fix for OpenSSL vulnerability
-ENV RUSTFLAGS="-C target-feature=-crt-static"
-RUN apk add --no-cache rust && \
-    apk add --no-cache openssl-dev && \
-    apk add --no-cache --virtual .build-deps build-base libffi-dev && \
+RUN apk add --no-cache rust openssl-dev && \
+    apk add --no-cache --virtual .build-deps build-base && \
     pip install cryptography==3.4.7 && \
-    apk del .build-deps
+    apk del .build-deps && \
+    export RUSTFLAGS="-C target-feature=-crt-static"
 
 WORKDIR /code
 
