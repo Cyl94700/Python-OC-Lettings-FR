@@ -16,7 +16,7 @@ RUN apk add --no-cache rust && \
     apk add --no-cache --virtual .build-deps build-base libffi-dev && \
     ENV RUSTFLAGS="-C target-feature=-crt-static" && \
     pip install cryptography==3.4.7 && \
-    apk del .build-deps \
+    apk del .build-deps
 
 WORKDIR /code
 
