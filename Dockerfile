@@ -6,7 +6,8 @@ WORKDIR /code
 ADD ./ .
 
 # Install dependencies
-RUN pip install -r requirements.txt
+RUN apk --no-cache add zlib-dev && \
+    pip install -r requirements.txt
 
 # Define the default port
 EXPOSE 8000
