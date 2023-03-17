@@ -2,21 +2,21 @@ FROM python:3.10.5-alpine
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV RUSTFLAGS="-C target-feature=-crt-static"
+#ENV RUSTFLAGS="-C target-feature=-crt-static"
 
 # Fix for libexpat vulnerability
-RUN apk add --no-cache expat-dev && \
-    apk add --no-cache expat-dev libxml2-dev libxslt-dev && \
-    apk add --no-cache --virtual .build-deps gcc musl-dev && \
-    pip install --upgrade lxml==4.6.3 && \
-    apk del .build-deps
+#RUN apk add --no-cache expat-dev && \
+#    apk add --no-cache expat-dev libxml2-dev libxslt-dev && \
+#    apk add --no-cache --virtual .build-deps gcc musl-dev && \
+#    pip install --upgrade lxml==4.6.3 && \
+#    apk del .build-deps
 
 # Fix for OpenSSL vulnerability
-RUN apk add --no-cache rust cargo openssl-dev && \
-    apk add --no-cache --virtual .build-deps build-base && \
-    pip install cryptography==3.4.7 && \
-    apk del .build-deps && \
-    export RUSTFLAGS="-C target-feature=-crt-static $RUSTFLAGS"
+#RUN apk add --no-cache rust cargo openssl-dev && \
+#    apk add --no-cache --virtual .build-deps build-base && \
+#    pip install cryptography==3.4.7 && \
+#    apk del .build-deps && \
+#    export RUSTFLAGS="-C target-feature=-crt-static $RUSTFLAGS"
 
 WORKDIR /code
 
