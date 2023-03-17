@@ -12,11 +12,11 @@ RUN apk add --no-cache expat-dev && \
     apk del .build-deps
 
 # Fix for OpenSSL vulnerability
-RUN apk add --no-cache rust openssl-dev && \
+RUN apk add --no-cache rust cargo openssl-dev && \
     apk add --no-cache --virtual .build-deps build-base && \
     pip install cryptography==3.4.7 && \
     apk del .build-deps && \
-    export RUSTFLAGS="-C target-feature=-crt-static"
+    export RUSTFLAGS="-C target-feature=-crt-static $RUSTFLAGS"
 
 WORKDIR /code
 
