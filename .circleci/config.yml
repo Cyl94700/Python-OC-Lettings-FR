@@ -18,7 +18,7 @@
         - run:
             command: flake8
             name: run linting
-    build_docker_push:
+    build-docker-push:
       docker:
         - image: cimg/python:3.10.5
       steps:
@@ -54,7 +54,7 @@
     master:
       jobs:
         - build-and-test
-        - build_docker_push:
+        - build-docker-push:
             requires:
               - build-and-test
             filters:
@@ -63,7 +63,7 @@
                   - master
         - deployment-heroku:
             requires:
-              - build_docker_push
+              - build-docker-push
             filters:
               branches:
                 only:

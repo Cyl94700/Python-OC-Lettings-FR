@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="img/logo.png"/>
+</p>
+
 ## Résumé
 
 Site web d'Orange County Lettings
@@ -75,3 +79,49 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+## Déploiement
+
+### Prérequis
+- Un compte Github
+- Un compte CircleCi
+- Un compte DockerHub
+- Un compte Heroku
+- Un compte Sentry
+
+### Principe de fonctionnement du pipeline CircleCi
+
+Cette gestion est codifiée dans le fichier config.yml du projet.
+
+#### Push sur une branche autre que master
+
+Seul le job `build-and-test` s'exécute avec les actions suivantes :
+  - Run Tests : exécution de tests unitaires via la commande pytest
+  - Run Linting PEP8 : exécution du linting via la commande flake8
+    
+#### Push sur la branche master
+
+Trois jobs peuvent s'exécuter :
+- `build-and-test` 
+- `build-docker-push` est lancé seulement si `build-and-test` s'est terminé correctement avec les étapes suivantes :
+  - Build Docker image : création d'une image docker à partir du code source de l'application.
+  - Push Docker Image : Chargement de l'image vers le Docker Hub avec deux tags : l'un correspondant au 'hash' de commit CircleCI et l'autre avec le tag 'latest'".
+- `deployment-heroku` est lancé seulement si `build-docker-push` est un succès et exécute l'action suivante :
+  - Start container and push to Heroku : lancement du build de l'application sur Heroku via Git
+
+
+### Variables d'environnement :
+
+Il est nécessaire de définir des variables d'environnement (dans CircleCi) pour le fonctionnement du déploiement :
+
+| Nom des Variables | Description                              |
+|-------------------|------------------------------------------|
+| `DOCKER_REPO`     | Nom de votre repository Docker           |
+| `DOCKER_USERNAME` | Nom d'utilisateur de votre compte Docker |
+| `DOCKER_TOKEN`    | Token de votre compte Docker             |
+| `HEROKU_API_KEY`  | Clé API de votre compte Heroku           |
+| `HEROKU_APP_NAME` | Nom de l'application Heroku              |
+| `SENTRY_DSN`      | Token interne d'intégration Sentry       |
+| `SECRET_KEY`      | Clé secrete Django                       |
+
+### Exécution du déploiement
