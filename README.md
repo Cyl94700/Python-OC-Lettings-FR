@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img/logo.png"/>
+  <img src="img/Logo.png"/>
 </p>
 
 ## Résumé
@@ -123,5 +123,7 @@ Il est nécessaire de définir des variables d'environnement (dans CircleCi) pou
 | `HEROKU_APP_NAME` | Nom de l'application Heroku              |
 | `SENTRY_DSN`      | Token interne d'intégration Sentry       |
 | `SECRET_KEY`      | Clé secrete Django                       |
+| `PORT`            | Port de votre apllication                |
+
 
 ### Exécution du déploiement
