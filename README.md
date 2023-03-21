@@ -1,10 +1,48 @@
 <p align="center">
   <img src="img/Logo.png"/>
-</p>
+</p> 
+<p align="center">
+<a href="https://www.python.org">
+<img src="https://img.shields.io/badge/Python-3.10.5-green?style=flat&logo=python&logoColor=white" alt="python-badge">
+</a>  
+<a href="https://www.djangoproject.com">
+    <img src="https://img.shields.io/badge/Django-4.1+-blue?style=flat&logo=django&logoColor=white" alt="django-badge">
+</a>
+<a href="https://circleci.com/gh/Cyl94700/Python-OC-Lettings-FR">
+  <img src="https://circleci.com/gh/Cyl94700/Python-OC-Lettings-FR.svg?style=shield" alt="CircleCI">
+</a>
+<a href="https://www.docker.com">
+    <img src="https://img.shields.io/badge/Docker-20.10.23-2CA5E0?style=flat&logo=docker&logoColor=white" alt="docker-badge">
+  </a>
+<a href="https://python-oc-lettings-cyl94700.herokuapp.com/">
+    <img src="https://img.shields.io/badge/heroku-deployed-blueviolet.svg" alt="Heroku Deployed">
+  </a>  
+<a href="https://pytest-django.readthedocs.io/en/latest/">
+    <img src="https://img.shields.io/badge/pytestdjango-4.5.2-blue" alt="pytestdjango-badge">
+</a>
+<a href="https://flake8.pycqa.org/en/latest/" target="_blank">
+<img src="https://img.shields.io/badge/flake8-3.7.0-blue?logo=python&style=flat-square"></a>  
+ </p>  
 
-## Résumé
+---
+## Accès rapide
 
-Site web d'Orange County Lettings
+#### - [Développement local](#heading--1)
+#### - [Déploiement](#heading--2)
+
+---
+
+## Livrable du P13 OC DA-Pyton :  
+**Mettez à l'échelle une application Django en utilisant une architecture modulaire**
+### Introduction et objectifs
+Orange County Lettings est une start-up fictive dans le secteur de la location de biens immobiliers.
+La société étant en croissance, elle doit faire évoluer son site web éxistant (repository GitHub : [OC Lettings](https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR)) sur quatre points :
+- Réduction de diverses dettes techniques sur le projet 
+- Refonte de l'architecture modulaire 
+- Ajout d'un pipeline CI/CD utilisant CircleCI et Heroku 
+- Surveillance de l’application et suivi des erreurs via Sentry.
+
+<div id="heading--1"/>  
 
 ## Développement local
 
@@ -78,7 +116,9 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
-- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`  
+
+<div id="heading--2"/>  
 
 ## Déploiement
 
@@ -97,7 +137,7 @@ Cette gestion est codifiée dans le fichier config.yml du projet.
 
 Seul le job `build-and-test` s'exécute avec les actions suivantes :
   - Run Tests : exécution de tests unitaires via la commande pytest
-  - Run Linting PEP8 : exécution du linting via la commande flake8
+  - Run Linting : exécution du linting via la commande flake8
     
 #### Push sur la branche master
 
@@ -133,7 +173,14 @@ Il faut également définir un fichier .env à la racine de votre projet avec le
 | `SENTRY_DSN`      | Token interne d'intégration Sentry       |
 
 ### Exécution du déploiement
-Après avoir réalisé un commit push, vous pouvez exécuter l'application à partir d'une image locale (avec Docker) ou directement sur Heroku  
+Après avoir réalisé un commit push, vous pouvez suivre les étapes du workflows sur CircleCi :  
+<p align="center">
+  <img src="img/circleci2.png"/>
+</p>  
+<p align="center">
+  <img src="img/circleci.png"/>
+</p> 
+Vous pouvez ensuite exécuter l'application à partir d'une image locale (avec Docker) ou directement sur Heroku  
 
 #### Docker :  
 Depuis votre terminal, tapez les 2 commandes suivantes :
