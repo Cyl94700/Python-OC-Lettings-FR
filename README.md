@@ -110,20 +110,43 @@ Trois jobs peuvent s'exécuter :
   - Start container and push to Heroku : lancement du build de l'application sur Heroku via Git
 
 
-### Variables d'environnement :
+### Définition des variables d'environnement :
 
 Il est nécessaire de définir des variables d'environnement (dans CircleCi) pour le fonctionnement du déploiement :
 
-| Nom des Variables | Description                              |
+| Nom des variables | Description                              |
 |-------------------|------------------------------------------|
 | `DOCKER_REPO`     | Nom de votre repository Docker           |
 | `DOCKER_USERNAME` | Nom d'utilisateur de votre compte Docker |
 | `DOCKER_TOKEN`    | Token de votre compte Docker             |
 | `HEROKU_API_KEY`  | Clé API de votre compte Heroku           |
 | `HEROKU_APP_NAME` | Nom de l'application Heroku              |
-| `SENTRY_DSN`      | Token interne d'intégration Sentry       |
 | `SECRET_KEY`      | Clé secrete Django                       |
-| `PORT`            | Port de votre apllication                |
+| `SENTRY_DSN`      | Token interne d'intégration Sentry       |
 
+
+Il faut également définir un fichier .env à la racine de votre projet avec les variables suivantes :
+
+| Nom des variables | Description                              |
+|-------------------|------------------------------------------|
+| `SECRET_KEY`      | Clé secrete Django                       |
+| `SENTRY_DSN`      | Token interne d'intégration Sentry       |
 
 ### Exécution du déploiement
+Après avoir réalisé un commit push, vous pouvez exécuter l'application à partir d'une image locale (avec Docker) ou directement sur Heroku  
+
+#### Docker :  
+Depuis votre terminal, tapez les 2 commandes suivantes :
+- `docker pull cyl94700/python-oc-lettings-fr:latest  `
+- `docker run -p 8000:8000 cyl94700/python-oc-lettings-fr:latest `  
+
+Ces commandes permettent la récupération et l'accès à la dernière image créée, mais vous pouvez utiliser une image antérieure en utilisant le "hash" du commit CircleCi correspondant au lieu du terme "latest".
+
+Puis, depuis votre navigateur, rendez-vous sur :  
+
+- http://localhost:8000/
+
+#### Heroku
+Rendez-vous à l'adresse suivante :  
+
+https://python-oc-lettings-cyl94700.herokuapp.com/
