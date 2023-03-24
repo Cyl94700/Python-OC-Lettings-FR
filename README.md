@@ -196,5 +196,4 @@ Puis, depuis votre navigateur, rendez-vous sur :
 #### Heroku
 Rendez-vous à l'adresse suivante :  
 
-https://python-oc-lettings-cyl94700.herokuapp.com/  
-#### Sentry
+https://python-oc-lettings-cyl94700.herokuapp.com/
