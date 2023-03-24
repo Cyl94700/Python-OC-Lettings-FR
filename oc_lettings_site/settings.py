@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # Take environment variables from .env file
-if os.path.isfile(BASE_DIR / '.env'):
+if os.path.isfile(os.path.join(BASE_DIR, '.env')):
     load_dotenv()
 
 
