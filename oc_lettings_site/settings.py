@@ -6,20 +6,16 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(f"BASE_DIR: {BASE_DIR}")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# Take environment variables from .env file
-# if os.path.isfile(os.path.join(BASE_DIR, '.env')):
-#    load_dotenv()
-dotenv_path = os.path.join(BASE_DIR, '.env')
-print(f"dotenv_path: {dotenv_path}")
-load_dotenv(dotenv_path)
-
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+# Take environment variables from .env file for local env
+if os.path.isfile(os.path.join(BASE_DIR, '.env')):
+    load_dotenv()
+    SECRET_KEY = os.environ['SECRET_KEY']
+else:
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
