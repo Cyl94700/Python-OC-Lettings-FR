@@ -45,10 +45,10 @@
             name: Start container and push to Heroku
             command: |
               curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-              heroku config:set DJANGO_ALLOWED_HOSTS=$HEROKU_APP_NAME.herokuapp.com --app $HEROKU_APP_NAME
+              heroku config:set DJANGO_ALLOWED_HOSTS=$HEROKU_APP_NAME.herokuapp.com SECRET_KEY=$SECRET_KEY --app $HEROKU_APP_NAME
               HEROKU_API_KEY=$HEROKU_API_KEY heroku config:set SENTRY_DSN=$SENTRY_DSN -a $HEROKU_APP_NAME
               HEROKU_API_KEY=$HEROKU_API_KEY heroku container:login
-              HEROKU_API_KEY=$HEROKU_API_KEY heroku container:push -a $HEROKU_APP_NAME web
+              HEROKU_API_KEY=$HEROKU_API_KEY heroku container:push -a
               HEROKU_API_KEY=$HEROKU_API_KEY heroku container:release -a $HEROKU_APP_NAME web
   workflows:
     master:
